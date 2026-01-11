@@ -126,11 +126,18 @@ class IPAnalysisEngine:
             ip_obj = ipaddress.ip_address(target_ip)
             is_v6 = (ip_obj.version == 6)
             cats_order = ["whitelist", "blacklist"]
+            
+            matches = []
 
             if not is_v6:
                 for cat in cats_order:
                     if target_ip in self.singles[cat]:
-                        return ("Safe" if cat == "whitelist" else "Malicious"), cat.capitalize(), self.singles[cat][target_ip], target_ip
+                        matches.append({
+                            "verdict": "Safe" if cat == "whitelist" else "Malicious",
+                            "cat": cat,
+                            "file": self.singles[cat][target_ip],
+                            "rule": target_ip
+                        })
 
             if not is_v6:
                 first_octet = target_ip.split('.')[0]
@@ -138,14 +145,39 @@ class IPAnalysisEngine:
                     if first_octet in self.cidr_v4_index[cat]:
                         for net, filename in self.cidr_v4_index[cat][first_octet]:
                             if ip_obj in net:
-                                return ("Safe" if cat == "whitelist" else "Malicious"), cat.capitalize(), filename, str(net)
+                                matches.append({
+                                    "verdict": "Safe" if cat == "whitelist" else "Malicious",
+                                    "cat": cat,
+                                    "file": filename,
+                                    "rule": str(net)
+                                })
             else:
                 for cat in cats_order:
                     for net, filename in self.cidr_v6_list[cat]:
                         if ip_obj in net:
-                            return ("Safe" if cat == "whitelist" else "Malicious"), cat.capitalize(), filename, str(net)
+                            matches.append({
+                                "verdict": "Safe" if cat == "whitelist" else "Malicious",
+                                "cat": cat,
+                                "file": filename,
+                                "rule": str(net)
+                            })
             
-            return "Unknown", "External Intel", "N/A", "N/A"
+            if not matches:
+                return "Unknown", "External Intel", "N/A", "N/A"
+
+            unique_files = sorted(list(set(m['file'] for m in matches)))
+            files_str = " | ".join(unique_files)
+            
+            is_malicious = any(m['verdict'] == 'Malicious' for m in matches)
+            final_verdict = "Malicious" if is_malicious else "Safe"
+            
+            if len(unique_files) > 1:
+                final_verdict += f" (Multi-Match: {len(unique_files)})"
+            
+            primary_rule = matches[0]['rule']
+            
+            return final_verdict, "Local DB", files_str, primary_rule
+
         except: return "Error", "Invalid Format", "N/A", "N/A"
 
     def fetch_api(self, ip):
@@ -161,9 +193,9 @@ class IPAnalysisEngine:
 def show_header():
     os.system('cls' if os.name == 'nt' else 'clear')
     print(f"\n{C}  {'─'*65}")
-    print(f"{C}    IP-ANALYSIS-SYSTEM {W}v2.1")
+    print(f"{C}    IP-ANALYSIS-SYSTEM {W}v2.2 (Multi-Match)")
     print(f"{Y}    Project by: Abdulaziz Aljoissam")
-    print(f"{G}    IPv6 Support | Cloud Safe-Guard | Optimized Core")
+    print(f"{G}    IPv6 Support | Cloud Safe-Guard | Multi-Hit Detection")
     print(f"{C}  {'─'*65}\n")
 
 def process_offline(target, engine):
@@ -183,14 +215,12 @@ def process_offline(target, engine):
         ver_cat, ver_src, ver_file, ver_rule = engine.check_local(ip)
         
         sheet_cat = "UNCATEGORIZED"
-        if ver_cat == "Malicious": sheet_cat = "MALICIOUS_THREAT"
-        elif ver_cat == "Safe": sheet_cat = "SAFE_WHITELIST"
-
-        verdict_fmt = f"{ver_cat} (Match: {ver_rule})" if ver_rule != "N/A" else ver_cat
+        if "Malicious" in ver_cat: sheet_cat = "MALICIOUS_THREAT"
+        elif "Safe" in ver_cat: sheet_cat = "SAFE_WHITELIST"
 
         return {
             "Classification": sheet_cat, "IP": ip, "Target": target.strip(),
-            "Verdict": verdict_fmt, "Matched_File": ver_file, 
+            "Verdict": ver_cat, "Matched_File": ver_file, 
             "Organization": ver_file if ver_file != "N/A" else "Local DB", 
             "Country": "Local Match" if ver_file != "N/A" else "N/A", 
             "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
