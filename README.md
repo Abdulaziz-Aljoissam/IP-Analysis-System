@@ -1,3 +1,6 @@
+<img width="1115" height="628" alt="image" src="https://github.com/user-attachments/assets/fd2bea7d-7045-4848-8c23-5af54c1c4f20" />
+
+
 # IP ANALYSIS SYSTEM
 
 Documentation : https://github.com/Abdulaziz-Aljoissam/IP_Analysis_System
@@ -7,7 +10,8 @@ Documentation : https://github.com/Abdulaziz-Aljoissam/IP_Analysis_System
 
 ## Description
 
-IP Analysis System is a professional pentest and SOC intelligence tool. The purpose of this project is to provide security researchers with a high-speed environment to analyze IP addresses against local databases and external threat intelligence. It is designed to handle thousands of IPs using multi-threaded processing, supporting both IPv4 and IPv6 protocols.
+IP Analysis System is a professional pentest and SOC intelligence tool. 
+The purpose of this project is to provide security researchers with a high-speed environment to analyze IP addresses against local databases and external threat intelligence. It is designed to handle thousands of IPs using multi-threaded processing, supporting both IPv4 and IPv6 protocols.
 
 ## Caution
 
@@ -34,6 +38,7 @@ This project uses an open-source framework. You can modify the code, add new thr
 ---
 
 ## Key Features
+<img width="1293" height="398" alt="image" src="https://github.com/user-attachments/assets/02e516c1-cba8-449a-ab1f-3d73d3778b43" />
 
 * **IPv6 Ready**: Full support for extracting and analyzing IPv6 addresses and networks.
 * **Cloud Safe-Guard**: Automatic whitelisting for major providers like AWS, Google, and Azure.
