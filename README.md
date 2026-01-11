@@ -32,9 +32,8 @@ This system is built for security analysis and pentest practice. Do not use this
 
 ## ✨ Key Features
 
-<p align="center">
-  <img width="1293" height="398" alt="Features Overview" src="https://github.com/user-attachments/assets/02e516c1-cba8-449a-ab1f-3d73d3778b43" />
-</p>
+<img width="1480" height="415" alt="image" src="https://github.com/user-attachments/assets/7f35e074-619d-4d3b-babe-b58ea7302c1e" />
+
 
 * **IPv6 Ready**: Full support for extracting and analyzing IPv6 addresses and networks.
 * **Cloud Safe-Guard**: Automatic whitelisting for major providers like Google, AWS, Azure, and Cloudflare.
