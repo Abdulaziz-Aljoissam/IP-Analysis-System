@@ -25,7 +25,8 @@ from colorama import init, Fore
 
 init(autoreset=True)
 
-BASE_PATH = r"C:\Users\aziz\Desktop\IP_Analysis_System"
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+
 PATHS = {
     "blacklist": os.path.join(BASE_PATH, "IP_Blacklist"),
     "whitelist": os.path.join(BASE_PATH, "IP_Whitelist"),
@@ -316,3 +317,4 @@ if __name__ == "__main__":
             print(f"    - Multi-match detection identifies IPs in multiple sources.")
             input("\n    Enter...")
         elif c == "0": break
+
