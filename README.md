@@ -1,47 +1,48 @@
-high-performance PowerShell-based security tool designed for the analysis and classification of IPv4 addresses. Developed by Abdulaziz Aljoissam, the system enables security professionals to process large IP lists by cross-referencing them against local intelligence and automated online databases.
+Description:
+IP Analysis System is a professional pentest and SOC intelligence tool. 
+The purpose of this project is to provide security researchers with a high-speed environment to analyze IP addresses against local databases and external threat intelligence. 
+It is designed to handle thousands of IPs using multi-threaded processing, supporting both IPv4 and IPv6 protocols.
 
-The tool is specifically engineered for speed, utilizing a specialized Two-Stage Verification algorithm to handle datasets exceeding 600,000 records efficiently.
+Caution:
+This system is built for security analysis and pentest practice. 
+Do not use this tool for unauthorized activities. 
+The automatic cloud safe-guard is designed to prevent false positives against major providers, but users should always verify results manually before taking action. 
+Use it at your own risk.
 
-How It Works
-The system follows a structured pipeline to classify IP addresses accurately:
+---
 
-Extraction: The tool reads input files such as logs, CSVs, or plain text and extracts valid IPv4 addresses.
+Licenses:
+This project uses an open-source framework. You can modify the code, add new threat feeds to the blacklist folders, or rebuild the local database as needed for your specific security requirements.
 
-Indexing: During the loading phase, it builds a prefix-based index to facilitate rapid searching.
+---
 
-Two-Stage Verification:
+Available Modules:
+FAST ANALYSIS | High-speed scan using local blacklists and whitelists only. 
+DEEP ANALYSIS | Full local scan combined with API lookups for unknown IPs. 
+QUICK SEARCH | Instant individual lookup and hierarchy network check.
+STATISTICS | Generates a health report of the database and rules count.
+REPOSITORIES | Direct access to projects, generated reports, and logs. 
 
-Stage 1 (Trigger): Performs a lightning-fast match using IP prefixes (e.g., /8, /16, /24) to identify a small group of potential candidates.
+Key Features:
+IPv6 Ready: Full support for extracting and analyzing IPv6 addresses and networks.
+Cloud Safe-Guard: Automatic whitelisting for major providers like AWS, Google, and Azure.
+Multi-Threaded: High-performance scanning with 60 parallel workers for local analysis.
+Automatic Setup: Self-configuring environment that builds the necessary folder structure on launch.
+CIDR Support: Advanced matching for network ranges using optimized first-octet indexing.
 
-Stage 2 (Confirm): Conducts precise CIDR validation and bitwise matching only on the candidates identified in the first stage.
+---
 
-Auto-Classification: For addresses not found in local lists, the system can perform a WHOIS lookup via ip-api.com to classify them based on organization reputation or geographic risk.
+Installation
 
-Reporting: Results are organized into specific project folders containing detailed CSV files and a summary report.
+1. Clone the repository:
+   `git clone https://github.com/Abdulaziz-Aljoissam/IP_Analysis_System.git`
 
-Directory Structure
-The system uses a organized folder hierarchy to manage data:
+2. Run the system:
+   `python ip_analyzer.py`
 
-IP_Blacklist/: Store local threat intelligence and known malicious ranges here.
+   Place your IP lists in the IP_Blacklist or IP_Whitelist folders and start the scan.
 
-IP_Whitelist/: Store trusted sources, internal networks, or authorized IPs here.
+---
 
-Projects/: Automatically stores all analysis results and categorized reports.
-
-Logs/: Contains technical logs for auditing the analysis process.
-
-Building Your Rules
-The tool's effectiveness depends on the intelligence files you provide in the IP_Blacklist/ and IP_Whitelist/ folders.
-
-Format: You can use .txt or .csv files containing one IP per line or CIDR notation.
-
-CIDR Notation: Using CIDR (e.g., 192.168.0.0/16) is highly recommended for large ranges as it maximizes the performance of the Two-Stage Verification logic.
-
-No Spaces: Ensure CIDR notation is written without spaces (e.g., 10.0.0.0/8) to ensure proper parsing.
-
-Quick Start
-Run_Analyzer.bat: The easiest method to start the program; it handles execution policy bypass automatically.
-
-Manual Start: Run .\IP_Analyzer.ps1 directly from a PowerShell terminal.
-
-CLI Parameters: Use parameters for automation, such as .\IP_Analyzer.ps1 -InputFile "external_ips.txt" -ProjectName "SecurityAudit".
+**Project by: Abdulaziz Aljoissam**
+*IP-ANALYSIS-SYSTEM v2.0 - Security Intelligence Framework*
