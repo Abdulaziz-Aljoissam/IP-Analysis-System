@@ -5,7 +5,6 @@
 </p>
 
 **Documentation** : https://github.com/Abdulaziz-Aljoissam/IP_Analysis_System  
-**License** : GPL-3.0  
 **Author** : Abdulaziz Aljoissam
 
 ---
