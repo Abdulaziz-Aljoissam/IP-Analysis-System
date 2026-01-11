@@ -12,10 +12,6 @@
 
 **IP Analysis System** is a professional pentest and SOC intelligence tool. The purpose of this project is to provide security researchers with a high-speed environment to analyze IP addresses against local databases and external threat intelligence. It is designed to handle thousands of IPs using multi-threaded processing, supporting both IPv4 and IPv6 protocols.
 
-## ⚠️ Caution
-
-This system is built for security analysis and pentest practice. Do not use this tool for unauthorized activities. The automatic cloud safe-guard is designed to prevent false positives against major providers like AWS, Google, and Azure, but users should always verify results manually before taking action. Use it at your own risk.
-
 ---
 
 ## 🚀 Available Modules
