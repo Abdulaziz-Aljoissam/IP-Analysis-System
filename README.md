@@ -1,5 +1,4 @@
-<img width="1115" height="628" alt="image" src="https://github.com/user-attachments/assets/fd2bea7d-7045-4848-8c23-5af54c1c4f20" />
-
+<img width="1115" height="628" alt="image" src="https://github.com/user-attachments/assets/16317641-b747-4ff2-964f-1a760c08151a" />
 
 # IP ANALYSIS SYSTEM
 
